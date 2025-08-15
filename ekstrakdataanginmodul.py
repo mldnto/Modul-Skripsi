@@ -80,7 +80,7 @@ df_nearest = pd.DataFrame(records_nearest)
 
 
 # === Simpan ke Excel ===
-output_folder = f"D:/anto/proposal/modulskripsi/gelombang/dataanginmodel/{nama_aws.replace(' ', '_')}/"
+output_folder = f"D:/anto/proposal/modulskripsi/verifikasi/dataanginmodel/{nama_aws.replace(' ', '_')}/"
 os.makedirs(output_folder, exist_ok=True)  # Membuat folder jika belum ada
 
 output_file = f"{output_folder}wind_data_{tahun_bulan}.xlsx"
@@ -89,6 +89,7 @@ with pd.ExcelWriter(output_file) as writer:
     df_nearest.to_excel(writer, sheet_name='Titik Terdekat', index=False)
 
 print(f"Ekspor ke {output_file} selesai.")
+
 
 
 
