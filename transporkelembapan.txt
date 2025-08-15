@@ -1,0 +1,72 @@
+'reinit'
+
+* --- DEFINISI VARIABEL ---
+tahunbulan = "202011"
+tanggalkejadian = "20201101"
+
+* Buka data
+'sdfopen D:\anto\proposal\modulskripsi\transporkelembapan\'tahunbulan'\specific_humidity_stream-oper_daily-mean.nc'
+'sdfopen D:\anto\proposal\modulskripsi\transporkelembapan\'tahunbulan'\u_component_of_wind_0_daily-mean.nc'
+'sdfopen D:\anto\proposal\modulskripsi\transporkelembapan\'tahunbulan'\v_component_of_wind_0_daily-mean.nc'
+
+* Matikan tulisan grads
+'set timelab off'
+'set grads off'
+
+* Set wilayah dan waktu
+'set lon 90 130'
+'set lat -30 0'
+'set t 1'
+
+* Set warna lebih soft di bawah 200, misalnya putih untuk <200
+'set rgb 99 255 255 255'    
+'set rgb 100 200 255 255'   
+'set rgb 101 100 200 255'   
+'set rgb 102 0 150 200'     
+'set rgb 103 0 100 150'     
+'set rgb 104 0 200 100'     
+'set rgb 105 255 255 0'     
+'set rgb 106 255 150 0'     
+'set rgb 107 255 0 0'       
+
+* Level dan warna kontur (pastikan jumlahnya sama)
+'set clevs 100 200 300 400 500 600 700 800 900 1000'
+'set ccols 99 100 101 102 103 104 105 106 107 2'
+
+* Plot magnitude transport uap air sebagai warna
+'set gxout shaded'
+'d mag((q.1(z=1)*u.2(z=1)*75 + q.1(z=2)*u.2(z=2)*75 + q.1(z=3)*u.2(z=3)*150 + q.1(z=4)*u.2(z=4)*100 + q.1(z=5)*u.2(z=5)*100 + q.1(z=6)*u.2(z=6)*200)*100/9.8 , (q.1(z=1)*v.3(z=1)*75 + q.1(z=2)*v.3(z=2)*75 + q.1(z=3)*v.3(z=3)*150 + q.1(z=4)*v.3(z=4)*100 + q.1(z=5)*v.3(z=5)*100 + q.1(z=6)*v.3(z=6)*200)*100/9.8)'
+'cbarn'
+
+* Tambah vektor arah transport uap air
+'set gxout vector'
+'set arrlab off'
+'set arrscl 0.001 1'
+'set line 1'
+'d skip((q.1(z=1)*u.2(z=1)*75 + q.1(z=2)*u.2(z=2)*75 + q.1(z=3)*u.2(z=3)*150 + q.1(z=4)*u.2(z=4)*100 + q.1(z=5)*u.2(z=5)*100 + q.1(z=6)*u.2(z=6)*200)*100/9.8, 5); skip((q.1(z=1)*v.3(z=1)*75 + q.1(z=2)*v.3(z=2)*75 + q.1(z=3)*v.3(z=3)*150 + q.1(z=4)*v.3(z=4)*100 + q.1(z=5)*v.3(z=5)*100 + q.1(z=6)*v.3(z=6)*200)*100/9.8, 5)'
+
+* Tambahkan garis pantai
+'set mpdset hires'
+'draw map'
+
+* Ambil koordinat dari hasil di atas secara manual:
+* Misal output-nya:
+* 105 -25 = 4.52778 1.91667
+* 110 -25 = 5.5 1.91667
+* 110 -30 = 5.5 0.75
+* 105 -30 = 4.52778 0.75
+
+* Set garis kotak hitam
+'set line 2 1 9'
+'draw line 4.52778 1.91667 5.5 1.91667'   
+'draw line 5.5 1.91667 5.5 0.75'   
+'draw line 5.5 0.75 4.52778 0.75'   
+'draw line 4.52778 0.75 4.52778 1.91667'   
+
+* Tambahkan judul utama
+'draw title Transpor Kelembapan SS 'tanggalkejadian
+'set strsiz 0.15'
+'draw string 9.75 1.2 kg/m/s'
+
+* Simpan hasil ke gambar PNG
+'printim D:\anto\proposal\modulskripsi\transporkelembapan\'tahunbulan'\ivt_kejadian.png png white'
