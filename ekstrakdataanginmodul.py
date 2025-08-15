@@ -25,7 +25,7 @@ def calculate_wind_speed_and_direction(uwnd, vwnd):
     return speed_knots, speed_ms, dir_deg
 
 # === Baca file NetCDF ===
-file_path = f"D:/anto/proposal/modulskripsi/gelombang/hindcast/{tahun_bulan}/H_hires_{tahun_bulan}.nc.nc4"
+file_path = f"D:/anto/proposal/modulskripsi/gelombang/hindcast/{tahun_bulan}/hasil_gabungan_{tahun_bulan}.nc"
 ds = xr.open_dataset(file_path)
 
 # Ambil dimensi
@@ -89,6 +89,7 @@ with pd.ExcelWriter(output_file) as writer:
     df_nearest.to_excel(writer, sheet_name='Titik Terdekat', index=False)
 
 print(f"Ekspor ke {output_file} selesai.")
+
 
 
 
