@@ -171,7 +171,7 @@ for sheet_name in wave_data.keys():
     ax.set_xticklabels(x_labels)
     
     # Highlighting h=0
-    ax.axvline(x=2, color='red', linestyle=':', label='Event (h=0)')
+    ax.axvline(x=2, color='red', linestyle=':', label='Kejadian SS (h=0)')
     
     # Adding legend and grid
     ax.legend(loc='upper right')
@@ -183,5 +183,6 @@ for sheet_name in wave_data.keys():
     plt.close()
 
 print(f"Plots saved in {plot_dir}/ directory")
+
 
 
